@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FEATURED_API = "http://localhost/api/movies/";
+const FEATURED_API = "http://127.0.0.1:8000/api/movies/";
 
 function Navbar() {
   let history = useHistory();

@@ -45,7 +45,7 @@ export default function Profile() {
     e.preventDefault();
     if (values.name === "" && values.email === "" && values.password === "") return;
     console.log(values);
-    axios.put(`http://localhost/api/users/${user.id}`, {
+    axios.put(`http://127.0.0.1:8000/api/users/${user.id}`, {
       "name": values.name, 
       "email": values.email,
       "password": values.password,
@@ -63,7 +63,7 @@ export default function Profile() {
   }
 
   const getReview = () =>{
-    axios.get(`http://localhost/api/users/${user.id}/reviews`)
+    axios.get(`http://127.0.0.1:8000/api/users/${user.id}/reviews`)
     .then(response =>{
         setReviews([...response.data]);
     })

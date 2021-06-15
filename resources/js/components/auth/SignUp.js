@@ -32,7 +32,7 @@ export default function Signup ({ submitForm }) {
   };  
 
   function submitForm() {
-    axios.post('http://localhost/api/auth/signup', {"name":values.username,"email":values.email, "password":values.password})
+    axios.post('http://127.0.0.1:8000/api/auth/signup', {"name":values.username,"email":values.email, "password":values.password})
     .then( response =>{
       setIsSubmitted(true);
     })

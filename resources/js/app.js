@@ -42,7 +42,7 @@ export default function App() {
           <PublicRoute path='/login' component={Login} />
           <PublicRoute path='/profile' component={Profile} />
 
-          <Admin dataProvider={restProvider('http://localhost/api')}>
+          <Admin dataProvider={restProvider('http://127.0.0.1:8000/api')}>
             <Resource
               name='movies'
               show={MovieShow}

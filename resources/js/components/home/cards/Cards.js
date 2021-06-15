@@ -5,7 +5,7 @@ import CardItem from './CardItem';
 import { Pagination } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FEATURED_API = "http://localhost/api/movies/";
+const FEATURED_API = "http://127.0.0.1:8000/api/movies/";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -63,7 +63,7 @@ export default function AddMovie () {
   };
 
   function submitForm() {
-    axios.post('http://localhost/api/movies', {
+    axios.post('http://127.0.0.1:8000/api/movies', {
       "title": values.title, 
       "overview": values.overview,
       "runtime": values.length,
