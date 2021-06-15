@@ -57,7 +57,7 @@ function Footer() {
           <div className='social-icons'>
             <a
               className='social-icon-link github'
-              href='http://github.com/phongdk29101999/Review-Movie-API'
+              href='https://github.com/minhld99/itss-movie-review'
               target='_blank'
               aria-label='Github'
             >

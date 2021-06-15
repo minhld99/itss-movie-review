@@ -171,7 +171,7 @@ export default function AddMovie () {
                   className='form-input'
                   type='poster_path'
                   name='poster_path'
-                  placeholder='URL：http://...'
+                  placeholder='URL：https://...'
                   value={values.poster_path}
                   // onChange={handleUploadImage}
                   onChange={handleChange}
@@ -183,7 +183,7 @@ export default function AddMovie () {
                   className='form-input'
                   type='backdrop_path'
                   name='backdrop_path'
-                  placeholder='URL：http://...'
+                  placeholder='URL：https://...'
                   value={values.backdrop_path}
                   // onChange={handleUploadImage}
                   onChange={handleChange}

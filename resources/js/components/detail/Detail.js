@@ -92,7 +92,7 @@ function Detail(){
           })
     }
     const getLanguages = () =>{
-        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${FEATURED_KEY}&language=ja-JP`)
+        axios.get(`http://api.themoviedb.org/3/movie/${id}?api_key=${FEATURED_KEY}&language=ja-JP`)
         .then(response =>{console.log(response)})
         .catch(e => {console.log(e)})
             
