@@ -11,6 +11,11 @@ import axios from 'axios';
 
 import './Profile.css';
 
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -45,7 +50,7 @@ export default function Profile() {
     e.preventDefault();
     if (values.name === "" && values.email === "" && values.password === "") return;
     console.log(values);
-    axios.put(`http://127.0.0.1:8000/api/users/${user.id}`, {
+    axios.put(`${URL}/api/users/${user.id}`, {
       "name": values.name, 
       "email": values.email,
       "password": values.password,
@@ -63,7 +68,7 @@ export default function Profile() {
   }
 
   const getReview = () =>{
-    axios.get(`http://127.0.0.1:8000/api/users/${user.id}/reviews`)
+    axios.get(`${URL}/api/users/${user.id}/reviews`)
     .then(response =>{
         setReviews([...response.data]);
     })

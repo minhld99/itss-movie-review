@@ -17,6 +17,11 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
+
 export default function Signup ({ submitForm }) {
   const classes = useStyles();
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -32,7 +37,7 @@ export default function Signup ({ submitForm }) {
   };  
 
   function submitForm() {
-    axios.post('http://127.0.0.1:8000/api/auth/signup', {"name":values.username,"email":values.email, "password":values.password})
+    axios.post(`${URL}/api/auth/signup`, {"name":values.username,"email":values.email, "password":values.password})
     .then( response =>{
       setIsSubmitted(true);
     })

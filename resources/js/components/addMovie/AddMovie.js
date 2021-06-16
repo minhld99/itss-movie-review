@@ -18,6 +18,11 @@ const convertBase64 = (file) => {
   })
 }
 
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
+
 export default function AddMovie () {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,7 +68,7 @@ export default function AddMovie () {
   };
 
   function submitForm() {
-    axios.post('http://127.0.0.1:8000/api/movies', {
+    axios.post(`${URL}/api/movies`, {
       "title": values.title, 
       "overview": values.overview,
       "runtime": values.length,

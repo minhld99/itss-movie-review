@@ -9,7 +9,6 @@ import { Button, Modal } from "react-bootstrap"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { BiPencil } from 'react-icons/bi';
 import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles(theme => ({
     dialogWrapper: {
@@ -22,7 +21,12 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Detail(){
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
+
+export default function Detail() {
     const classes = useStyles();
     const [movie, setMovie] = useState();
     const [reviews, setReviews] = useState([]);
@@ -70,7 +74,7 @@ function Detail(){
     const handleShow = () => setShow(true);
 
     const handleAddComment = () =>{
-        axios.post('http://127.0.0.1:8000/api/reviews', {user_id, movie_id:id, review_text:myComment, rating:myRating})
+        axios.post(`${URL}/api/reviews`, {user_id, movie_id:id, review_text:myComment, rating:myRating})
         .then( response =>{
             const listReview = [...reviews];
             listReview.push(response.data);
@@ -81,7 +85,7 @@ function Detail(){
     }
 
     const fetchMovies = () => {
-        axios.get(`http://127.0.0.1:8000/api/movies/${id}`).then(response => {
+        axios.get(`${URL}/api/movies/${id}`).then(response => {
         console.log(response.data)
         let data = {...response.data}
         data.runtime = formatRunTime(data.runtime);
@@ -94,7 +98,7 @@ function Detail(){
       }
 
     const getReview = () =>{
-        axios.get(`http://127.0.0.1:8000/api/movies/${id}/reviews`)
+        axios.get(`${URL}/api/movies/${id}/reviews`)
         .then(response =>{
             // console.log(response);
             setReviews([...response.data]);
@@ -232,5 +236,3 @@ function Detail(){
         </React.Fragment>
     )
 }
-
-export default Detail;

@@ -9,7 +9,11 @@ import avatar from './avatar.svg';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { userCheck } from 'react-admin';
+
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -66,9 +70,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FEATURED_API = "http://127.0.0.1:8000/api/movies/";
-
 function Navbar() {
+  console.log(process.env.NODE_ENV);
   let history = useHistory();
   const classes = useStyles();
   const [click, setClick] = useState(false);
@@ -101,7 +104,7 @@ function Navbar() {
     showButton();
     const user_id = JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')).id:null;
     if (user_id) setAuth(true)
-    fetchMoviesData(FEATURED_API);
+    fetchMoviesData(`${URL}/api/movies/`);
   }, []);
 
   window.addEventListener('resize', showButton);

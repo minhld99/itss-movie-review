@@ -7,6 +7,11 @@ import './Form.css';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
+
 export default function Login ({ submitForm }) {
   const history = useHistory();
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -17,7 +22,7 @@ export default function Login ({ submitForm }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function submitForm() {
-    axios.post('http://127.0.0.1:8000/api/auth/login', {"email":values.email, "password":values.password})
+    axios.post(`${URL}/api/auth/login`, {"email":values.email, "password":values.password})
     .then( response =>{
       localStorage.setItem('user',JSON.stringify({...response.data.user}));
       history.push("/");

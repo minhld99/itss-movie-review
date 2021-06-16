@@ -5,7 +5,10 @@ import CardItem from './CardItem';
 import { Pagination } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FEATURED_API = "http://127.0.0.1:8000/api/movies/";
+const URL = "http://127.0.0.1:8000";
+if (process.env.NODE_ENV === 'production') {
+  URL = "https://itss-movie-review.herokuapp.com";
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +35,9 @@ function Cards() {
   }
 
   useEffect(() => {
-    fetchMovies(FEATURED_API);
+    fetchMovies(`${URL}/api/movies/`);
     if (movies && loading) setLoading(false);
-  }, [FEATURED_API]);
+  }, []);
 
   const handleOnChange = (e, pageNum) => {
     var splicedList = movies.slice((pageNum-1)*6, (pageNum-1)*6 + 6);
