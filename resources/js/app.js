@@ -29,10 +29,8 @@ import './app.css';
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-const URL = "http://127.0.0.1:8000";
-if (process.env.NODE_ENV === 'production') {
-  URL = "https://itss-movie-review.herokuapp.com";
-}
+// const URL = "http://127.0.0.1:8000";
+const URL = "https://itss-movie-review.herokuapp.com";
 
 export default function App() {
 

@@ -21,10 +21,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const URL = "http://127.0.0.1:8000";
-if (process.env.NODE_ENV === 'production') {
-  URL = "https://itss-movie-review.herokuapp.com";
-}
+// const URL = "http://127.0.0.1:8000";
+const URL = "https://itss-movie-review.herokuapp.com";
 
 export default function Detail() {
     const classes = useStyles();
@@ -148,8 +146,9 @@ export default function Detail() {
                                           <h2 className="title">{movie.title+'('+movie.year+')'}</h2>
                                           <div>{movie.release_date} (VN)・{movie.runtime}</div>
                                           <div className="rating">
-                                             <div className="star"><ReactStars {...firstExample} value= {movie.vote_average} /></div>
-                                             <div className="average">{movie.vote_average}/10</div>
+                                              console.log(typeof(movie.vote_average))
+                                             <div className="star"><ReactStars {...firstExample} value= {Number(movie.vote_average)} /></div>
+                                             <div className="average">{Number(movie.vote_average)}/10</div>
                                           </div>
                                           <div style = {{fontStyle: 'italic', paddingBottom:'1rem'}}>{movie.tagline}</div>
                                           <h3>概要</h3>

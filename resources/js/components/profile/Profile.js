@@ -11,10 +11,8 @@ import axios from 'axios';
 
 import './Profile.css';
 
-const URL = "http://127.0.0.1:8000";
-if (process.env.NODE_ENV === 'production') {
-  URL = "https://itss-movie-review.herokuapp.com";
-}
+// const URL = "http://127.0.0.1:8000";
+const URL = "https://itss-movie-review.herokuapp.com";
 
 const useStyles = makeStyles({
   table: {

@@ -39,7 +39,7 @@ function CardItem({ title, poster_path, overview, vote_average, release_date, id
           </figure>
           <div className='cards__item__info'>
             <h3>{title}</h3>
-            <span className={`cards__item__tag ${setRateColor(vote_average)}`}>{vote_average.toFixed(1)}</span>
+            <span className={`cards__item__tag ${setRateColor(Number(vote_average))}`}>{Number(vote_average).toFixed(1)}</span>
           </div>
           <div className="cards__item__overview">
             <h2>Overview:</h2>

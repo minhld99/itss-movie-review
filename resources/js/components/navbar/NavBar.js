@@ -10,10 +10,8 @@ import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-const URL = "http://127.0.0.1:8000";
-if (process.env.NODE_ENV === 'production') {
-  URL = "https://itss-movie-review.herokuapp.com";
-}
+// const URL = "http://127.0.0.1:8000";
+const URL = "https://itss-movie-review.herokuapp.com";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
