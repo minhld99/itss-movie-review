@@ -146,7 +146,6 @@ export default function Detail() {
                                           <h2 className="title">{movie.title+'('+movie.year+')'}</h2>
                                           <div>{movie.release_date} (VN)・{movie.runtime}</div>
                                           <div className="rating">
-                                              console.log(typeof(movie.vote_average))
                                              <div className="star"><ReactStars {...firstExample} value= {Number(movie.vote_average)} /></div>
                                              <div className="average">{Number(movie.vote_average)}/10</div>
                                           </div>
