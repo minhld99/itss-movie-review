@@ -6,12 +6,24 @@ import ReactStars from "react-rating-stars-component";
 const FEATURED_KEY = "7d6c5edae738317365e3235566d4c72d";
 import CommentCard from "./CommentCard"
 import { Button, Modal } from "react-bootstrap"
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { BiPencil } from 'react-icons/bi';
+import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
-
+const useStyles = makeStyles(theme => ({
+    dialogWrapper: {
+        padding: theme.spacing(2),
+        position: 'absolute',
+        top: theme.spacing(5)
+    },
+    dialogTitle: {
+        paddingRight: '0px'
+    }
+}))
 
 function Detail(){
+    const classes = useStyles();
     const [movie, setMovie] = useState();
     const [reviews, setReviews] = useState([]);
     const {id} = useParams();
@@ -149,19 +161,43 @@ function Detail(){
                 <div className = "comment-container">
                     <div className="content">
                         <div style = {{display:'flex'}}>
-                        <h3　style = {{paddingTop:'1rem'}}>レビュー</h3>
-                        <div className = "add-comment-button"  onClick = {handleShow}><BiPencil />レビュー追加</div>
+                            <div style = {{display:'flex', alignItems: 'center'}}>
+                                <h2>レビュー</h2>
+                                <div className = "add-comment-button"  onClick = {handleShow}><BiPencil />レビュー追加</div>
+                            </div>
+                            <Dialog open={show} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+                                <DialogTitle className={classes.dialogTitle}>
+                                    <div style={{ display: 'flex' }}>
+                                        <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
+                                            {movie ? movie.title : null}
+                                        </Typography>
+                                    </div>
+                                </DialogTitle>
+                                <DialogContent dividers>
+                                    <div>Rate</div>
+                                    <ReactStars {...secondExample} value={myRating} onChange={(value) =>setMyRating(value)} />
+                                    <div>Content</div>
+                                    <input type = "text" style ={{border: "1px solid", width:"100%", minHeight:"5rem"}} value ={myComment} onChange = {handleChange} />
+                                    <div style ={{display: "flex", justifyContent: "space-around"}}>
+                                        <Button variant="secondary" onClick={handleClose} style ={{margin: "1rem"}}>
+                                            Close
+                                        </Button>
+                                        <Button variant="primary" onClick={handleAddComment} style ={{margin: "1rem"}}>
+                                            Save Changes
+                                        </Button>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         </div>
                       <div className="white-column">
                         <section className="panel-review">
                             <div className="review-container">
                                 <div className="review-content">
                                     {
-                                        
-                                        reviews.map((review) =>
-                                            
-                                               <CommentCard  key = {review.id} review={review}/>
-                                            )
+                                        reviews.length > 0 ? 
+                                            reviews.map((review) => <CommentCard  key = {review.id} review={review}/> )
+                                                :
+                                            <div className="card"><h3 style={{textAlign: "center"}}>コメントはまだありません！</h3></div>
                                     }
                                     
                                     </div>
@@ -174,7 +210,7 @@ function Detail(){
                 </>
                 :null
             }
-            <Modal show={show} onHide={handleClose}>
+            {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{movie?movie.title:null}</Modal.Title>
                 </Modal.Header>
@@ -192,7 +228,7 @@ function Detail(){
                     Save Changes
                 </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </React.Fragment>
     )
 }
