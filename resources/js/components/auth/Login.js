@@ -23,7 +23,8 @@ export default function Login ({ submitForm }) {
     axios.post(`${URL}/api/auth/login`, {"email":values.email, "password":values.password})
     .then( response =>{
       localStorage.setItem('user',JSON.stringify({...response.data.user}));
-      history.push("/");
+      if (response.data.user.is_admin) history.push("/admin"); 
+      else history.push("/");
     })
     .catch(err => console.log(err))
   }

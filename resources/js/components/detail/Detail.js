@@ -6,7 +6,6 @@ import ReactStars from "react-rating-stars-component";
 const FEATURED_KEY = "7d6c5edae738317365e3235566d4c72d";
 import CommentCard from "./CommentCard"
 import { Button, Modal } from "react-bootstrap"
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { BiPencil } from 'react-icons/bi';
 import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
 
@@ -31,9 +30,11 @@ export default function Detail() {
     const {id} = useParams();
     const [myComment, setMyComment] = useState();
     const [myRating, setMyRating] = useState(0);
+    const [response, setResponse] = useState('');
     const user_id = JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')).id:null;
 
     const handleChange = (event) =>{
+        setResponse('');
         setMyComment(event.target.value);
     }
 
@@ -68,7 +69,10 @@ export default function Detail() {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setResponse('');
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const handleAddComment = () =>{
@@ -77,6 +81,7 @@ export default function Detail() {
             const listReview = [...reviews];
             listReview.push(response.data);
             setReviews(listReview);
+            setResponse(response.data.message);
             handleClose();
         })
         .catch(e => {console.log(e)})
@@ -187,6 +192,7 @@ export default function Detail() {
                                         <Button variant="primary" onClick={handleAddComment} style ={{margin: "1rem"}}>
                                             Save Changes
                                         </Button>
+                                        {response ? <h3>{response}</h3> : null}
                                     </div>
                                 </DialogContent>
                             </Dialog>

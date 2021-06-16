@@ -24,7 +24,6 @@ import ReviewShow from './components/admin/ReviewShow';
 import PublicRoute from './components/utils/router/PublicRoute';
 import AdminRoute from './components/utils/router/AdminRoute';
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -33,6 +32,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 const URL = "https://itss-movie-review.herokuapp.com";
 
 export default function App() {
+  const user = JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):null;
 
   return (
     <>
@@ -44,36 +44,32 @@ export default function App() {
           <PublicRoute path='/sign-up' component={SignUp} />
           <PublicRoute path='/login' component={Login} />
           <PublicRoute path='/profile' component={Profile} />
-
-          <Admin dataProvider={restProvider(`${URL}/api`)}>
-            <Resource
-              name='movies'
-              show={MovieShow}
-              list={MovieList}
-              create={MovieCreate}
-              edit={MovieEdit}
-            />
-            <Resource
-              name='users'
-              list={UserList}
-              create={UserCreate}
-              edit={UserEdit}
-            />
-            <Resource
-              name='reviews'
-              list={ReviewList}
-              show={ReviewShow}
-              edit={ReviewEdit}
-            />
-          </Admin>
-
-          {/* <AdminRoute path='/admin' exact component={Admin} />
-          <AdminRoute path='/admin/create-user' component={CreateUser} />
-          <AdminRoute path='/admin/edit-user/:id' component={EditUser} />
-          <AdminRoute path='/admin/list-user' component={ListUser} />
-          <AdminRoute path='/admin/create-movie' component={CreateMovie} />
-          <AdminRoute path='/admin/edit-movie/:id' component={EditMovie} />
-          <AdminRoute path='/admin/list-movie' component={ListMovie} /> */}
+          
+          {user ? (
+            <Admin dataProvider={restProvider(`${URL}/api`)}>
+              <PublicRoute path='/' exact component={Home} />
+              <Resource
+                name='movies'
+                show={MovieShow}
+                list={MovieList}
+                create={MovieCreate}
+                edit={MovieEdit}
+              />
+              <Resource
+                name='users'
+                list={UserList}
+                create={UserCreate}
+                edit={UserEdit}
+              />
+              <Resource
+                name='reviews'
+                list={ReviewList}
+                show={ReviewShow}
+                edit={ReviewEdit}
+              />
+            </Admin>
+          ) : <PublicRoute path='/admin' exact component={Home} />
+          }
         </Switch>
       </Router>
     </>

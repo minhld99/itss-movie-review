@@ -69,7 +69,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar() {
-  console.log(process.env.NODE_ENV);
   let history = useHistory();
   const classes = useStyles();
   const [click, setClick] = useState(false);
@@ -77,6 +76,7 @@ function Navbar() {
   const [search, setSearch] = useState(false);
   const [data, setData] = useState([]);
   const [auth, setAuth] = useState(false);
+  const user = JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):null;
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -100,8 +100,7 @@ function Navbar() {
 
   useEffect(() => {
     showButton();
-    const user_id = JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')).id:null;
-    if (user_id) setAuth(true)
+    if (user) setAuth(true);
     fetchMoviesData(`${URL}/api/movies/`);
   }, []);
 
@@ -177,8 +176,17 @@ function Navbar() {
                 <i className="fas fa-plus"></i>
               </Link>
             </li>
+            {auth && user.is_admin && <li className='nav-item'>
+              <Link
+                to='/admin'
+                className='nav-links'
+                onClick={handleSignOut}
+              >
+                Admin Page
+              </Link>
+            </li>}
             {auth && <li className='nav-item'>
-            <Link
+              <Link
                 to='/'
                 className='nav-links'
                 onClick={handleSignOut}

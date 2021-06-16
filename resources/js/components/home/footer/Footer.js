@@ -31,7 +31,7 @@ function Footer() {
             <h2>名前</h2>
             <Link to='/'>Cong<b> (TL)</b></Link>
             <Link to='/'>Chi<b> (SL)</b></Link>
-            <Link to='/'>Minh</Link>
+            <Link to='/'>Minh (it's me)</Link>
             <Link to='/'>Vinh</Link>
             <Link to='/'>Phong</Link>
           </div>
